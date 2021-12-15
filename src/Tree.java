@@ -81,6 +81,7 @@ public class Tree {
     }
 
     public void vacio(Stack<String> Operadores,Node node){
+        System.out.println(Operadores);
         if(Operadores.isEmpty()){
             this.raiz=node;
         }
