@@ -45,12 +45,18 @@ public class Tree {
                     if(expresion.charAt(i)=='('){
                         Operadores.push(String.valueOf(expresion.charAt(i)));
                     }else if(expresion.charAt(i)==')'){
-                      Node newNode=new Node(Operadores.pop());
-                      Operadores.pop();
-                      newNode.derecho=Expresiones.pop();
-                      newNode.izquierdo=Expresiones.pop();
-                      Expresiones.push(newNode);
-                      this.vacio(Operadores,newNode);
+                        while(!Operadores.get(Operadores.size()-1).equals("(")){
+                            Node newNode=new Node(Operadores.pop());
+                            newNode.derecho=Expresiones.pop();
+                            newNode.izquierdo=Expresiones.pop();
+                            Expresiones.push(newNode);
+                            if(Operadores.get(Operadores.size()-1).equals("(")){
+                                Operadores.pop();
+                                this.vacio(Operadores,newNode);
+                                break;
+                            }
+                        }
+
                     }
                 }
             }else{
@@ -61,10 +67,16 @@ public class Tree {
         }
 
         if(!Operadores.isEmpty()){
-            Node newNode=new Node(Operadores.pop());
-            newNode.derecho=Expresiones.pop();
-            newNode.izquierdo=Expresiones.pop();
-            this.raiz=newNode;
+            while(!Operadores.isEmpty()){
+                if(!Operadores.get(Operadores.size()-1).equals(")")){
+                    Node newNode=new Node(Operadores.pop());
+                    newNode.derecho=Expresiones.pop();
+                    newNode.izquierdo=Expresiones.pop();
+                    this.raiz=newNode;
+                }else{
+                    Operadores.pop();
+                }
+            }
         }
     }
 
@@ -150,6 +162,8 @@ public class Tree {
                     if(pila.get(pila.size()-1)=='('){
                         pila.pop();
                     }
+                }else{
+                    return false;
                 }
             }
         }
