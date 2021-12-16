@@ -7,6 +7,7 @@ import javax.swing.*;
 
 public class Graficar extends JPanel
 {
+    //Propiedades de la clase
     private Tree miArbol;
     private HashMap posicionNodos = null;
     private HashMap subtreeSizes = null;
@@ -17,15 +18,22 @@ public class Graficar extends JPanel
 
 
 
+    //Metodo constructor de la clase
     public Graficar(Tree miArbol)
     {
+        //Inicializamos la variable miarbol con lo que recibimos de parametro
         this.miArbol = miArbol;
+        //creamos un panel de la clase JPanel de java
         JPanel panel = new JPanel();
+        //Creams las dimensiones del panel
         panel.setPreferredSize(new Dimension(220, 60));
+        //Inicializamos las propiedades como HashMap
         posicionNodos = new HashMap();
         subtreeSizes = new HashMap();
         dirty = true;
+        //Ejecutamos el metodo add pasandole el panel
         add(panel);
+        //Repintamos
         repaint();
     }
 
@@ -37,17 +45,21 @@ public class Graficar extends JPanel
      */
     private void calcularPosiciones()
     {
+        //Limpiamos las posiciones
         posicionNodos.clear();
         subtreeSizes.clear();
         Node root = this.miArbol.raiz;
+        //Si root es distinto de null
         if (root != null)
         {
+            //Calculamos tamaño y posiciones
             calcularTamañoSubarbol(root);
             calcularPosicion(root, Integer.MAX_VALUE, Integer.MAX_VALUE, 0);
         }
     }
 
 
+    //Metodo que nos ayuda a calcular El tamaño del arbol o sub arboles
     private Dimension calcularTamañoSubarbol(Node n)
     {
         if (n == null)
