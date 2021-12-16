@@ -232,6 +232,7 @@ public class Tree {
     public static Hashtable<String,Integer> Hash(){
         //Creacion de la tabla de hash
         Hashtable<String,Integer> hash=new Hashtable<>();
+        //Añadimos datos al hashTable
         hash.put("^",3);
         hash.put("*",2);
         hash.put("/",2);
